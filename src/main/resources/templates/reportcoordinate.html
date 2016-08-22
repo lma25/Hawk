@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/signin.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+
+    <form class="form-signin" action="/ReportCoordinate" method="post">
+        <h2 class="form-signin-heading">Please report your coordinate</h2>
+        <input type="text" class="form-control" name="userId" value="0" placeholder="userId"/>
+        <input type="text" class="form-control" name="recordTime" value="1" placeholder="recordTime"/>
+        <input type="text" class="form-control" name="latitude" value="2" placeholder="latitude"/>
+        <input type="text" class="form-control" name="longitude" value="3" placeholder="longitude"/>
+        <input type="text" class="form-control" name="altitude" value="4" placeholder="altitude"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Report</button>
+    </form>
+
+</div>
+</body>
+</html>

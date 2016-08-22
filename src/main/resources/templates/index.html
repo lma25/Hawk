@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+       style="width:100%;height:100%">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <style>
+        .center {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+    </style>
+    <title>Video Analytica</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body style="width:100%;height:100%">
+<div class="navbar-wrapper">
+    <div class="container-fluid" style="padding:0">
+
+        <nav class="navbar navbar-light navbar-static-top" style="background-color: #e3f2fd;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/index">VideoAnalytica</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="/index">Home</a></li>
+                        <li><a href="/map">Demo</a></li>
+                        <li><a href="/ShareWithYou/templete/about.html">Solutions</a></li>
+                        <li><a href="/ShareWithYou/templete/about.html">About Us</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:if="${session.userName} != null" th:text="${session.userName}"></a></li>
+                        <li><a th:if="${session.userName} != null" href="/logout">Log Out</a></li>
+                        <li><a th:if="${session.userName} == null" href="/signin">Sign In</a></li>
+                        <li><a th:if="${session.userName} == null" href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container" style="width:70%;height:90%">
+    <div class="container picture" id="pic1" style="width:32%;height:40%;float:left">
+        <img src="images/test.jpg" alt="Test Picture"/>
+    </div>
+    <div class="container picture" id="pic2" style="width:32%;height:40%;float:left">
+        <img src="images/test.jpg" alt="Test Picture"/>
+    </div>
+    <div class="container picture" id="pic3" style="width:32%;height:40%;float:left">
+        <img src="images/test.jpg" alt="Test Picture"/>
+    </div>
+    <div class="discription col-md-12" id="p1" style="display:none;float:left">
+        <div class="col-md-8">
+            <iframe id="v1" width="640" height="360" src="https://www.youtube.com/embed/e1ZLFp_W7z0" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h2 class="featurette-heading"><b>Key1</b> This is Key1. <span class="text-muted">This is Key1.</span></h2>
+            <p class="lead">Write some discriptions here.</p>
+        </div>
+    </div>
+    <div class="discription col-md-12" id="p2" style="display:none">
+        <div class="col-md-4">
+            <h2 class="featurette-heading"><b>Key2</b> This is Key2. <span class="text-muted">This is Key2.</span></h2>
+            <p class="lead">Write some discriptions here.</p>
+        </div>
+        <div class="col-md-8">
+            <iframe id="v2" width="640" height="360" src="https://www.youtube.com/embed/e1ZLFp_W7z0" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+    </div>
+    <div class="discription col-md-12" id="p3" style="display:none">
+        <div class="col-md-8">
+            <iframe id="v3" width="640" height="360" src="https://www.youtube.com/embed/e1ZLFp_W7z0" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h2 class="featurette-heading"><b>Key3</b> This is Key3. <span class="text-muted">This is Key3.</span></h2>
+            <p class="lead">Write some discriptions here.</p>
+        </div>
+    </div>
+
+    <div class="container picture" id="pic4" style="width:32%;height:40%;float:left">
+        <img src="images/test.jpg" alt="Test Picture"/>
+    </div>
+    <div class="container picture" id="pic5" style="width:32%;height:40%;float:left">
+        <img src="images/test.jpg" alt="Test Picture"/>
+    </div>
+    <div class="container picture" id="pic6" style="width:32%;height:40%;float:left">
+        <img src="images/test.jpg" alt="Test Picture"/>
+    </div>
+    <div class="discription col-md-12" id="p4" style="display:none">
+        <div class="col-md-8">
+            <iframe id="v4" width="640" height="360" src="https://www.youtube.com/embed/e1ZLFp_W7z0" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h2 class="featurette-heading"><b>Key4</b> This is Key4. <span class="text-muted">This is Key4.</span></h2>
+            <p class="lead">Write some discriptions here.</p>
+        </div>
+    </div>
+    <div class="discription col-md-12" id="p5" style="display:none">
+        <div class="col-md-8">
+            <iframe id="v5" width="640" height="360" src="https://www.youtube.com/embed/e1ZLFp_W7z0" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h2 class="featurette-heading"><b>Key5</b> This is Key5. <span class="text-muted">This is Key5.</span></h2>
+            <p class="lead">Write some discriptions here.</p>
+        </div>
+    </div>
+    <div class="discription col-md-12" id="p6" style="display:none">
+        <div class="col-md-8">
+            <iframe id="v6" width="640" height="360" src="https://www.youtube.com/embed/e1ZLFp_W7z0" frameborder="0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="col-md-4">
+            <h2 class="featurette-heading"><b>Key6</b> This is Key6. <span class="text-muted">This is Key6.</span></h2>
+            <p class="lead">Write some discriptions here.</p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; VideoAnalytica. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+
+</div><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    function increaseOpacity(selector){
+        selector.children().css("opacity","1");
+    }
+    function decreaseOpacity(selector){
+        selector.children().css("opacity","0.3");
+    }
+    function switchOpacity(selector){
+        if(selector.children().css("opacity") == 1){
+            decreaseOpacity(selector);
+        }else{
+            decreaseOpacity($("#pic1"));
+            decreaseOpacity($("#pic2"));
+            decreaseOpacity($("#pic3"));
+            decreaseOpacity($("#pic4"));
+            decreaseOpacity($("#pic5"));
+            decreaseOpacity($("#pic6"));
+            increaseOpacity(selector);
+        }
+    }
+    function stopVideos(){
+        $('#v1').attr('src', $('#v1').attr('src'));
+        $('#v2').attr('src', $('#v2').attr('src'));
+        $('#v3').attr('src', $('#v3').attr('src'));
+        $('#v4').attr('src', $('#v4').attr('src'));
+        $('#v5').attr('src', $('#v5').attr('src'));
+        $('#v6').attr('src', $('#v6').attr('src'));
+    }
+
+    $(document).ready(function(){
+        $("#pic1").hover(
+                function(){
+                    $("div").clearQueue();
+                    $("#pic3").animate({width:"16%"});
+                    $("#pic2").animate({width:"16%"});
+                    $("#pic1").animate({width:"64%"});
+                },
+                function(){
+                    $("#pic1").animate({width:"32%"});
+                    $("#pic2").animate({width:"32%"});
+                    $("#pic3").animate({width:"32%"});
+                }
+        );
+        $("#pic1").click(
+                function(){
+                    $(".discription").not($("#p1")).hide();
+                    switchOpacity($("#pic1"));
+                    $("#p1").slideToggle(500);
+                    stopVideos();
+                }
+        );
+        $("#pic2").hover(
+                function(){
+                    $("div").clearQueue();
+                    $("#pic3").animate({width:"16%"});
+                    $("#pic1").animate({width:"16%"});
+                    $("#pic2").animate({width:"64%"});
+                },
+                function(){
+                    $("#pic2").animate({width:"32%"});
+                    $("#pic1").animate({width:"32%"});
+                    $("#pic3").animate({width:"32%"});
+                }
+        );
+        $("#pic2").click(
+                function(){
+                    $(".discription").not($("#p2")).hide();
+                    switchOpacity($("#pic2"));
+                    $("#p2").slideToggle(500);
+                    stopVideos();
+                }
+        );
+        $("#pic3").hover(
+                function(){
+                    $("div").clearQueue();
+                    $("#pic1").animate({width:"16%"});
+                    $("#pic2").animate({width:"16%"});
+                    $("#pic3").animate({width:"64%"});
+                },
+                function(){
+                    $("#pic3").animate({width:"32%"});
+                    $("#pic2").animate({width:"32%"});
+                    $("#pic1").animate({width:"32%"});
+                }
+        );
+        $("#pic3").click(
+                function(){
+                    $(".discription").not($("#p3")).hide();
+                    switchOpacity($("#pic3"));
+                    $("#p3").slideToggle(500);
+                    stopVideos();
+                }
+        );
+        $("#pic4").hover(
+                function(){
+                    $("div").clearQueue();
+                    $("#pic5").animate({width:"16%"});
+                    $("#pic6").animate({width:"16%"});
+                    $("#pic4").animate({width:"64%"});
+                },
+                function(){
+                    $("#pic4").animate({width:"32%"});
+                    $("#pic5").animate({width:"32%"});
+                    $("#pic6").animate({width:"32%"});
+                }
+        );
+        $("#pic4").click(
+                function(){
+                    $(".discription").not($("#p4")).hide();
+                    switchOpacity($("#pic4"));
+                    $("#p4").slideToggle(500);
+                    stopVideos();
+                }
+        );
+        $("#pic5").hover(
+                function(){
+                    $("div").clearQueue();
+                    $("#pic4").animate({width:"16%"});
+                    $("#pic6").animate({width:"16%"});
+                    $("#pic5").animate({width:"64%"});
+                },
+                function(){
+                    $("#pic5").animate({width:"32%"});
+                    $("#pic4").animate({width:"32%"});
+                    $("#pic6").animate({width:"32%"});
+                }
+        );
+        $("#pic5").click(
+                function(){
+                    $(".discription").not($("#p5")).hide();
+                    switchOpacity($("#pic5"));
+                    $("#p5").slideToggle(500);
+                    stopVideos();
+                }
+        );
+        $("#pic6").hover(
+                function(){
+                    $("div").clearQueue();
+                    $("#pic5").animate({width:"16%"});
+                    $("#pic4").animate({width:"16%"});
+                    $("#pic6").animate({width:"64%"});
+                },
+                function(){
+                    $("#pic6").animate({width:"32%"});
+                    $("#pic5").animate({width:"32%"});
+                    $("#pic4").animate({width:"32%"});
+                }
+        );
+        $("#pic6").click(
+                function(){
+                    $(".discription").not($("#p6")).hide();
+                    switchOpacity($("#pic6"));
+                    $("#p6").slideToggle(500);
+                    stopVideos();
+                }
+        );
+
+        $("#menu-toggle").click(function(){
+            $("#menu").toggle(500);
+        });
+        $(document).on("click", ".switcher", function(){
+            var id = this.id.toString().slice(1);
+            var buttonId = "#b" + id;
+            if($(buttonId).html() == "OFF"){
+                $(buttonId).html("ON");
+                $(buttonId).removeClass("btn-default");
+                $(buttonId).addClass("btn-success");
+                appendUserIdToUrl(id);
+            }else{
+                $(buttonId).html("OFF");
+                $(buttonId).removeClass("btn-success");
+                $(buttonId).addClass("btn-default");
+                removeUserIdFromUrl(id);
+            }
+        });
+    });
+</script>
+</body>
+</html>

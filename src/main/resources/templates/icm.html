@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+       style="width:100%;height:100%">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+    <style>
+        .center {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+    </style>
+    <title>Video Analytica</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/signin.css" rel="stylesheet"/>
+    <link href="css/general.css" rel="stylesheet"/>
+</head>
+<body style="width:100%;height:100%">
+<div class="navbar-wrapper">
+    <div class="container-fluid" style="padding:0">
+
+        <nav class="navbar navbar-light navbar-static-top" style="background-color: #e3f2fd;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/index">VideoAnalytica</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="/index">Home</a></li>
+                        <li><a href="/map">Demo</a></li>
+                        <li><a href="/ShareWithYou/templete/about.html">Solutions</a></li>
+                        <li><a href="/ShareWithYou/templete/about.html">About Us</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:if="${session.userName} != null" th:text="${session.userName}"></a></li>
+                        <li><a th:if="${session.userName} != null" href="/logout">Log Out</a></li>
+                        <li><a th:if="${session.userName} == null" href="/signin">Sign In</a></li>
+                        <li><a th:if="${session.userName} == null" href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container" style="width:70%;height:90%">
+    <div th:if="${codes} == null">
+        <form class="form-signin" style="max-width: 500px;" action="#" th:action="@{/GetInvitationCode}" method="post">
+            <h2 class="form-signin-heading">Please input number of codes:</h2>
+            <p class="error-message" th:if="${errorMessage} != null" th:text="${errorMessage}"></p>
+            <input class="form-control" type="text" name="codeNumber" placeholder="Code Number" required="true"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Request Codes!</button>
+        </form>
+    </div>
+
+    <div th:if="${codes} != null">
+        <form class="form-signin" style="max-width: 500px;" action="#" th:action="@{/SetInvitationCodeLevel}" method="post">
+            <p class="error-message" th:if="${feedback} != null" th:text="${feedback}"></p>
+            <h2 class="form-signin-heading">Please set the level:</h2>
+            <p class="error-message" th:if="${errorMessage} != null" th:text="${errorMessage}"></p>
+            <input class="form-control" type="text" name="codeLevel" placeholder="Code level" required="true"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Set Level!</button>
+        </form>
+        <form class="form-signin" style="max-width: 500px;" action="#" th:action="@{/SendInvitationCode}" method="post">
+            <h2 class="form-signin-heading">Please input destinations:</h2>
+            <p class="error-message" th:if="${errorMessage} != null" th:text="${errorMessage}"></p>
+            <input class="form-control" type="text" name="destinations" placeholder="To:" required="true"/>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Send Code</button>
+        </form>
+        <div class="form-signin" style="max-width: 500px;" th:each="code : ${codes}">
+            <div>
+                <b th:text="${code.code}">Code</b>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; VideoAnalytica. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+
+</div><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

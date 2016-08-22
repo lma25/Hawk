@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="http://www.thymeleaf.org"
+    >
+<head>
+    <meta charset="UTF-8"/>
+    <title>Sing In</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/signin.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="navbar-wrapper">
+    <div class="container-fluid" style="padding:0">
+
+        <nav class="navbar navbar-light navbar-static-top" style="background-color: #e3f2fd;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/index">VideoAnalytica</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li class="active"><a href="/index">Home</a></li>
+                        <li><a href="/map">Demo</a></li>
+                        <li><a href="/ShareWithYou/templete/about.html">Solutions</a></li>
+                        <li><a href="/ShareWithYou/templete/about.html">About Us</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a th:if="${session.userName} != null" th:text="${session.userName}"></a></li>
+                        <li><a th:if="${session.userName} != null" href="/logout">Log Out</a></li>
+                        <li><a th:if="${session.userName} == null" href="/signin">Sign In</a></li>
+                        <li><a th:if="${session.userName} == null" href="/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<div class="container">
+    <form class="form-signin" action="#" th:action="@{/signin}" method="post">
+        <h2 class="form-signin-heading">Please sign in:</h2>
+        <p class="error-message" th:if="${errorMessage} != null" th:text="${errorMessage}"></p>
+        <input class="form-control" type="text" name="userName" placeholder="UserName" required="true"/>
+        <input class="form-control" type="password" name="password" placeholder="Password" required="true"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+    </form>
+</div>
+
+</body>
+</html>

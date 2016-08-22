@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML5 RTSP player example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        input.input, .form-inline .input-group>.form-control {
+            width: 300px;
+        }
+    </style>
+    <script type="text/javascript" src="dragiframe.js"></script>
+    <script type="text/javascript" src="jquery-1.12.3.js"></script>
+</head>
+<body onload="addHandle(document.getElementsByTagName('body').item(0), window);">
+<!-- Start of StatCounter Code for Default Guide -->
+
+
+
+<p style="text-align:left;"><span id="head">Test User</span><span id="close" style="float:right;">close</span></p>
+
+<div id="video"></div>
+
+<script>
+    var string = window.location.search;
+    var left = 0;
+    while(left < string.length && string[left] != '='){
+        ++left;
+    }
+    var s = string.substring(left + 1, string.length);
+    var index = s.length;
+    while(index >= 0 && s[index] != '_'){
+        --index;
+    }
+    var src = "/videos/" + s.substring(0, index) + "/1/" + s.substring(index + 1, s.length) + ".mp4";
+    document.getElementById("head").innerHTML = src;
+    document.getElementById("video").innerHTML = "<iframe id='test_video' width='290' height='210' src='" + src + "'></iframe>"
+
+</script>
+
+</body>
+</html>
