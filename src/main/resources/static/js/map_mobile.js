@@ -18,9 +18,6 @@ var infoWindow = new google.maps.InfoWindow();
 var iframes = [];
 var recordIframe = [];
 
-google.maps.event.addDomListener(window, 'load', initialize);
-setInterval(function() { updateMap();}, 20000);
-
 function initialize() {
     myCoordinate = {lat: 42.0840891, lng: -87.98112345};
     if(navigator.geolocation){
@@ -45,7 +42,6 @@ function initialize() {
     getRecordedVideos();
 
 }
-
 function getUsers(){
     var string = window.location.search;
     var left = 0;
@@ -228,9 +224,12 @@ function getRecordedVideos(){
                         google.maps.event.addListener(marker, 'click', (function(title, videoSrc){
                             return function() {
                                 if(recordIframe.indexOf(title) == -1) {
-                                    var left = "" + (340 + Math.random() * 300);
-                                    var top = "" + (Math.random() * 300);
-                                    document.getElementById("iframes").innerHTML += "<iframe class='iframes' id='" + title + "' name='" + title + "' width='300' height='250' style='position:absolute;left:" + left + "px;top:" + top + "px' src='/test/record.html?src=" + title + "'></iframe>";
+                                    var left = 15;
+                                    var top = 0;
+                                    document.getElementById("iframes").innerHTML +=
+                                        "<div data-role='popup' id='popupVideo' data-overlay-theme='b' data-theme='a' data-tolerance='15,15' class='ui-content'>" +
+                                        "<iframe class='iframes' id='" + title + "' name='" + title + "' width='300' height='250' style='position:absolute;left:" + left + "px;top:" + top + "px' src='/test/record.html?src=" + title + "' type='video/mp4'></iframe>" +
+                                        "</div>";
                                     recordIframe.push(title);
                                 }else{
                                     $("#" + title).remove();
@@ -370,6 +369,10 @@ function findIcon(id){
     setTimeout(function () { infowindow.close(); }, 5000);
 }
 
+google.maps.event.addDomListener(window, 'load', initialize);
+
+setInterval(function() { updateMap();}, 20000);
+
 function appendUserIdToUrl(userId){
     var url = window.location.toString();
     if(url.indexOf("userId") == -1){
@@ -412,7 +415,7 @@ function setUsersList(){
                 // Read usersList from JSON file.
                 if(users.indexOf(id) == -1){
                     document.getElementById("usersList").innerHTML +=
-                        "<li class='list-group-item' style='color:black' id='l" + id + "'><div class='list-first'  id='" + id + "'>" + id
+                        "<li class='list-group-item' style='color:black;background-color: #e3f2fd' id='l" + id + "'><div class='list-first'  id='" + id + "'>" + id
                         + "<div class='btn-group pull-right'> <button type='button' style='width:35px' class='btn btn-default btn-xs switcher' id='b"
                         + id + "'>OFF</button> </div></div> </li>";
                 }else{
@@ -481,7 +484,10 @@ function getTripId(k){
 
 $(document).ready(function(){
     $("#menu-toggle").click(function(){
-        $("#menu").toggle(500);
+        $("#menu").slideToggle(500);
+    });
+    $("#reset-map").click(function(){
+        window.location.replace("//iit.videoanalytica.com/map");
     });
 
     $(document).on("click", ".switcher", function(){
@@ -500,7 +506,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on("click", ".list-first", function(){
+    $(document).on("click touchstart", ".list-first", function(){
         var id = "#ll" + $(this).attr('id');
         if($(id).css("display") == "none"){
             $(id).css("display", "block");
@@ -511,6 +517,3 @@ $(document).ready(function(){
 
 
 });
-
-
-

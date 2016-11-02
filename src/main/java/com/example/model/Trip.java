@@ -19,7 +19,7 @@ public class Trip {
     @NotNull
     private String userName;
 
-    private Integer tripId;
+    private String tripId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "record_time")
@@ -50,11 +50,11 @@ public class Trip {
         this.userName = userName;
     }
 
-    public Integer getTripId() {
+    public String getTripId() {
         return tripId;
     }
 
-    public void setTripId(Integer tripId) {
+    public void setTripId(String tripId) {
         this.tripId = tripId;
     }
 

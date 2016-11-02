@@ -19,7 +19,7 @@ public class User {
     @NotNull
     @Column(name = "user_name", unique = true)
     @Size(min = 4, max = 40, message = "User name size is between 4 to 40.")
-    @Pattern(regexp = "[a-zA-Z]+[0-9a-zA-Z_]*", message = "User name should start with [a-zA-Z] and only include [0-9a-zA-Z].")
+    @Pattern(regexp = "[a-zA-Z]+[0-9a-zA-Z_]*", message = "User name should start with [a-zA-Z] and only include [0-9a-zA-Z_].")
     private String userName;
 
     @NotNull
@@ -29,8 +29,8 @@ public class User {
     private String email;
 
     @NotNull
-    @Size(min = 4, max = 40, message = "Password size is between 4 to 40.")
-    @Pattern(regexp = "[0-9a-zA-Z_!]*", message = "Password should only include [0-9a-zA-Z_!]")
+    /*@Size(min = 4, max = 40, message = "Password size is between 4 to 40.")
+    @Pattern(regexp = "[0-9a-zA-Z_!]*", message = "Password should only include [0-9a-zA-Z_!]")*/
     private String password;
 
     @Size(min = 0, max = 40)

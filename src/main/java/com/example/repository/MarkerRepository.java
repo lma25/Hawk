@@ -13,11 +13,11 @@ import java.util.Collection;
  */
 @Transactional
 public interface MarkerRepository extends JpaRepository<Marker, Integer> {
-    Collection<Marker> findByUserNameAndTripIdOrderByRecordTimeDesc(String userName, int tripId);
+    Collection<Marker> findByUserNameAndTripIdOrderByRecordTimeDesc(String userName, String tripId);
 
     @Modifying
     @Query("update Marker m set m.recordFile = m.recordFile + 1 where m.userName = ?1 and m.tripId = ?2")
-    int updateAfterInsert(String userName, Integer tripId);
+    int updateAfterInsert(String userName, String tripId);
 
     @Modifying
     @Query("delete from Marker m where m.recordFile = 11")

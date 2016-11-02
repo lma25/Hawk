@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/general.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzfoJC2iaIDO9M4pxFUxsUBqJ8t07XQPw&amp;callback=initialize"></script>
+    <script src="js/map_mobile.js"></script>
+    <script src="js/dragiframe.js"></script>
+
+</head>
+
+<body style="width:100%;height:100%">
+
+<div class="container-fluid" data-role="page" style="height:100%">
+
+    <div class="row" id ="content" style="height:100%">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #e3f2fd;opacity: 0.9;">
+            <div style="text-align:center">
+                 <ul class="nav navbar-nav navbar-left nav-tabs" style="display:inline-block; float:none;margin-top: 0px;margin-bottom: 0px;">
+                     <li><a href="//iit.videoanalytica.com/" style="padding-top: 12px; padding-bottom: 5px;">Home</a></li>
+                     <li id="menu-toggle"><a style="padding-top: 12px; padding-bottom: 5px;">Menu</a></li>
+                     <li id="reset-map"><a style="padding-top: 12px; padding-bottom: 5px;">Reset</a></li>
+                  </ul>
+            </div>
+            <div id="menu" style="width:100%;display:none">
+                <ul class="list-group" id="usersList" style="argin-bottom: 5px;">
+                </ul>
+            </div>
+        </nav>
+        <!--<div  id="menu" class="pull-left" style="width:350px;height:100%;padding-left:10px;padding-right:10px;background-color:#ffffff;opacity: 0.9;">
+            <h2><a href="/map">GeoSync Surveillance</a></h2>
+            <form role="form">
+                <input type="text" clas="form-control" id="userId" name="userId" style="float:left;width:88%;height:32px"/>
+                <button type="submit" class="btn btn-primary btn-sm glyphicon glyphicon-search" style="float:left;width:12%"></button>
+            </form>
+            <br/>
+            <br/>
+            <ul class="list-group" id="usersList">
+                <h4>10 most recent routes:</h4>
+            </ul>
+            <a href="/hv"><button class="btn btn-primary btn-block" id="toHawkView"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+            <footer class="footer">
+                <p>Map Application @Video Analytica</p>
+            </footer>
+        </div>
+        <button class="btn btn-primary pull-left" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger"></span></button>-->
+    </div>
+
+    <div id="map" class="pull-left" style="position:absolute;top:0;left:0;height:100%;width:100%">
+        <div id="googleMap" class="" style="height:100%;width:100%"></div>
+    </div>
+
+
+    <div class="row" id ="iframes" style="position:absolute;height:100%"></div>
+</div>
+
+</body>
+</html>

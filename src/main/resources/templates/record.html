@@ -22,11 +22,13 @@
 
 
 
-<p style="text-align:left;"><span id="head">Test User</span><span id="close" style="float:right;">close</span></p>
+<p style="text-align:left;"><span id="head">Test User</span><span id="close" style="float:right;"><button class="btn btn-danger btn-sm" style="padding-bottom: 1px;padding-top: 1px;">close</button></span><span id="find" style="float:right;"><button class="btn btn-info btn-sm" style="padding-bottom: 1px;padding-top: 1px;">find</button></span></p>
 
 <div id="video"></div>
 
 <script>
+    var src = "";
+
     var string = window.location.search;
     var left = 0;
     while(left < string.length && string[left] != '='){
@@ -34,12 +36,55 @@
     }
     var s = string.substring(left + 1, string.length);
     var index = s.length;
-    while(index >= 0 && s[index] != '_'){
+    while(index >= 0 && s[index] != '-'){
         --index;
     }
-    var src = "/videos/" + s.substring(0, index) + "/1/" + s.substring(index + 1, s.length) + ".mp4";
-    document.getElementById("head").innerHTML = src;
-    document.getElementById("video").innerHTML = "<iframe id='test_video' width='290' height='210' src='" + src + "'></iframe>"
+    var last = index;
+    index = 0;
+    while(index < s.length && s[index] != '-'){
+        ++index;
+    }
+    var first = index;
+    var path = "/videos/" + s.substring(0, first) + "/" + s.substring(first + 1, last) + "/" + s.substring(last + 1, s.length) + ".mp4";
+    document.getElementById("head").innerHTML = parent.setIframeHead(string.substring(left + 1, string.length));
+    var http = new XMLHttpRequest();
+    var url = "/FindCheckCode";
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function() {//Call a function when the state changes.
+        if(http.readyState == 4 && http.status == 200) {
+            src = "http://s." + getDomainName() + path + http.responseText;
+            //document.getElementById("head").innerHTML = path;
+            document.getElementById("video").innerHTML = "<iframe id='test_video' width='290' height='210' src='" + src + "'></iframe>"
+        }
+    }
+    http.send("path=" + path);
+
+
+    function getDomainName(){
+        var address = window.location.href;
+        var count = 0;
+        var end = 0;
+        while(end < address.length){
+            if(address[end] == '/'){
+                ++count;
+            }
+            if(count == 3){
+                break;
+            }
+            ++end;
+        }
+        return address.substring(7, end);
+    }
+
+    $(document).ready(function(){
+        $("#close").click(function(){
+            parent.closeIframe(string.substring(left + 1, string.length));
+        });
+        $("#find").click(function(){
+            parent.findIcon(string.substring(left + 1, string.length));
+        });
+    });
 
 </script>
 

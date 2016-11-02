@@ -2,10 +2,13 @@ package com.example.controller;
 
 
 import com.example.model.InvitationCode;
+import com.example.model.PasswordChecker;
 import com.example.model.User;
 import com.example.repository.InvitationCodeRepository;
 import com.example.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,8 +18,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
- * Created by Li on 2016/6/8.
+ * Created by Li on 2016/6/9.
  */
+
 
 @Controller
 public class UserMVCController {
@@ -24,6 +28,8 @@ public class UserMVCController {
     private UserRepository userRepository;
     @Autowired
     private InvitationCodeRepository invitationCodeRepository;
+
+    private PasswordChecker sCryptPasswordEncoder = new PasswordChecker();
 
     @RequestMapping(
             value = "/showUsers",
@@ -50,7 +56,7 @@ public class UserMVCController {
         if(userRepository.findByUserName(userName) == null){
             model.addAttribute("errorMessage", "Cannot find user name.");
             return "signin";
-        }else if(!userRepository.findByUserName(userName).getPassword().equals(password)){
+        }else if(!sCryptPasswordEncoder.matches(password, userRepository.findByUserName(userName).getPassword())){
             model.addAttribute("errorMessage", "Password is not correct.");
             return "signin";
         }
@@ -94,6 +100,8 @@ public class UserMVCController {
         }
         invitationCodeRepository.useCode(user.getInvitationCode());
         user.setLevel(invitationCode.getLevel());
+        // Scrypt the password.
+        user.setPassword(sCryptPasswordEncoder.encode(user.getPassword()));
         // If user passes all the checks, it can be stored in database.
         userRepository.save(user);
 
@@ -110,5 +118,4 @@ public class UserMVCController {
         }
         return "redirect:index";
     }
-
 }

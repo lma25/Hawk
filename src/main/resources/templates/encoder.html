@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html  lang="en"
+       xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Encoder</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/signin.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+    <form class="form-signin" action="/encoder" method="post">
+        <h2 class="form-signin-heading">Please Enter Parameters:</h2>
+
+        <p class="error-message" th:if="${errorMessage} != null" th:text="${errorMessage}"></p>
+        <input class="form-control" placeholder="Password" type="text" name="password" />
+
+        <input class="form-control" placeholder="CPU Cost / N" type="text" name="cpuCost"/>
+
+        <input class="form-control" placeholder="Memory Cost / r" type="text" name="memoryCost" />
+
+        <input class="form-control" placeholder="Parallelization / p" type="text" name="parallelization" />
+
+        <input class="form-control" placeholder="Key Length" type="text" name="keyLength"/>
+
+        <input class="form-control" placeholder="Salt Length" type="text" name="saltLength"/>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Encode</button>
+    </form>
+</div>
+</body>
+</html>

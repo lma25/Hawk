@@ -40,7 +40,7 @@ public class Marker {
 
     @NotNull
     @Column(name = "trip_id")
-    private Integer tripId;
+    private String tripId;
 
     public Integer getId() {
         return id;
@@ -98,11 +98,11 @@ public class Marker {
         this.recordTime = recordTime;
     }
 
-    public Integer getTripId() {
+    public String getTripId() {
         return tripId;
     }
 
-    public void setTripId(Integer tripId) {
+    public void setTripId(String tripId) {
         this.tripId = tripId;
     }
 }

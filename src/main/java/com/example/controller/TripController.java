@@ -17,6 +17,8 @@ public class TripController {
     @Autowired
     private TripRepository tripRepository;
 
+
+
     @RequestMapping(
             value = "/ReportCoordinate",
             method = RequestMethod.POST
@@ -28,9 +30,11 @@ public class TripController {
                                    @ModelAttribute("recordTime") String recordTime,
                                    @ModelAttribute("latitude") String latitude,
                                    @ModelAttribute("longitude") String longitude,
-                                   @ModelAttribute("altitude") String altitude){
+                                   @ModelAttribute("altitude") String altitude,
+                                   @ModelAttribute("tripId") String tripId
+    ){
         Trip trip = new Trip();
-        trip.setTripId(1);
+        trip.setTripId(tripId);
         trip.setUserName(userId);
         trip.setRecordTime(new Date());
         trip.setAltitude(altitude);
@@ -47,7 +51,7 @@ public class TripController {
     // To do list:
     // 1. Add code to deal with "tripId".
     public Collection<Trip> getRoute(@PathVariable String userName){
-        int tripId = tripRepository.findMostRecentTripId();
+        String tripId = tripRepository.findMostRecentTripId(userName);
         return tripRepository.findByUserNameAndTripId(userName,tripId);
     }
 
@@ -58,7 +62,7 @@ public class TripController {
     // To do list:
     // 1. Add code to deal with "tripId".
     public Collection<Trip> getRoute(@PathVariable("userName") String userName, @PathVariable("tripId") String tripId){
-        return tripRepository.findByUserNameAndTripId(userName,Integer.parseInt(tripId));
+        return tripRepository.findByUserNameAndTripId(userName,tripId);
     }
 
     @RequestMapping(
@@ -68,4 +72,13 @@ public class TripController {
     public void clearTrip(@PathVariable String userName){
         tripRepository.deleteByUserName(userName);
     }
+
+    @RequestMapping(
+            value = "/GetAllTripIds/{userName}",
+            method = RequestMethod.GET
+    )
+    public Collection<String> getAllTripIds(@PathVariable String userName){
+        return tripRepository.find5MostRecentTripId(userName);
+    }
+
 }

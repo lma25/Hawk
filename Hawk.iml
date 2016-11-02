@@ -116,5 +116,8 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.0.33" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat.embed:tomcat-embed-logging-juli:8.0.33" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:8.0.33" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:4.1.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE" level="project" />
   </component>
 </module>

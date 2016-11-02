@@ -85,6 +85,9 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.38" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.0.33" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-crypto:4.1.2.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.4" />
+          <element id="library" level="project" name="Maven: org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">
