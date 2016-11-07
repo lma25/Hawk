@@ -17,6 +17,8 @@ var xmlHttpsGetTrips = [];
 var infoWindow = new google.maps.InfoWindow();
 var iframes = [];
 var recordIframe = [];
+var bounds = new google.maps.LatLngBounds();
+var viewChangeFlag = false;
 
 google.maps.event.addDomListener(window, 'load', initialize);
 setInterval(function() { updateMap();}, 20000);
@@ -37,12 +39,12 @@ function initialize() {
         mapTypeControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP
     });
-    getUsers();
+    //getUsers();
     setUsersList();
-    initializePolylinesAndMarkers();
+    //initializePolylinesAndMarkers();
     //showStreamInIframe();
-    getRoute();
-    getRecordedVideos();
+    //getRoute();
+    //getRecordedVideos();
 
 }
 
@@ -102,7 +104,6 @@ function getRoute(){
             xmlHttpsGetRoute[k].onreadystatechange = function() {
                 if (xmlHttpsGetRoute[k].readyState == 4 && xmlHttpsGetRoute[k].status == 200) {
                     var route = JSON.parse(xmlHttpsGetRoute[k].responseText);
-                    var bounds = new google.maps.LatLngBounds();
                     var path = [];
                     for (var i = 0; i < route.length; ++i) {
                         var coordinate = new google.maps.LatLng(parseFloat(route[i].latitude), parseFloat(route[i].longitude));
@@ -118,11 +119,22 @@ function getRoute(){
                     google.maps.event.addListener(this.polyline, 'mouseout', function(event){
                         tripInfoWindow.close();
                     });
-                    if (center == null) {
+                    /*if (center == null) {
                         map.fitBounds(bounds);
                     } else {
                         map.setCenter(center);
                         map.setZoom(zoom);
+                    }*/
+
+                    var allSet = true;
+                    for(var i = 0; i < polylines.length; ++i){
+                        if(polylines[i].getPath().length <= 0){
+                            allSet = false;
+                        }
+                    }
+                    if(viewChangeFlag == true && allSet == true){
+                        map.fitBounds(bounds);
+                        viewChangeFlag = false;
                     }
 
                     var coordinate = new google.maps.LatLng(parseFloat(route[route.length - 1].latitude), parseFloat(route[route.length - 1].longitude));
@@ -296,10 +308,13 @@ function isInfoWindowOpen(){
 
 function updateMap(){
     if(isInfoWindowOpen() == false){
-        center = map.getCenter();
-        zoom = map.getZoom();
+        bounds = new google.maps.LatLngBounds();
         getRoute();
         getRecordedVideos();
+        if(viewChangeFlag == false){
+            center = map.getCenter();
+            zoom = map.getZoom();
+        }
     }
 }
 
@@ -476,7 +491,46 @@ function getTripId(k){
     return users[k].substring(i + 1, users[k].length);
 }
 
+function addToUsersAndPolylines(id){
+    var find = false;
+    for(var i = 0; i < users.length; ++i){
+        if(users[i] == id){
+            find = true;
+            break;
+        }
+    }
+    if(find != true){
+        users.push(id);
+        var path = [];
+        polylines.push(
+            new google.maps.Polyline({
+                path: path,
+                geodesic: true,
+                strokeColor: colorSet[users.length - 1],
+                strokeOpacity: 1.0,
+                strokeWeight: 4,
+                map: map
+            })
+        );
+    }
+}
 
+function removeFromUsersAndPolylines(id){
+    for(var i = 0; i < users.length; ++i){
+        if(users[i] == id){
+            users.splice(i, 1);
+            polylines[i].setMap(null);
+            polylines.splice(i, 1)
+            liveMarkers[i].setMap(null);
+            liveMarkers.splice(i, 1);
+            for(var j = 0; j < markers[i].length; ++j){
+                markers[i][j].setMap(null);
+            }
+            markers.splice(i, 1);
+            break;
+        }
+    }
+}
 
 
 $(document).ready(function(){
@@ -491,13 +545,17 @@ $(document).ready(function(){
             $(buttonId).html("ON");
             $(buttonId).removeClass("btn-default");
             $(buttonId).addClass("btn-success");
-            appendUserIdToUrl(id);
+            //appendUserIdToUrl(id);
+            addToUsersAndPolylines(id);
         }else{
             $(buttonId).html("OFF");
             $(buttonId).removeClass("btn-success");
             $(buttonId).addClass("btn-default");
-            removeUserIdFromUrl(id);
+            //removeUserIdFromUrl(id);
+            removeFromUsersAndPolylines(id);
         }
+        viewChangeFlag = true;
+        updateMap();
     });
 
     $(document).on("click", ".list-first", function(){
